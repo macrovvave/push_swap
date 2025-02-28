@@ -6,7 +6,7 @@
 /*   By: hoel-mos <hoel-mos@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 21:57:10 by hoel-mos          #+#    #+#             */
-/*   Updated: 2025/02/17 21:57:15 by hoel-mos         ###   ########.fr       */
+/*   Updated: 2025/02/28 23:05:44 by hoel-mos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,10 @@ void	ft_bzero(void *s, size_t n)
 
 	str = s;
 	byte = 0;
-	while (n--)
+	while (n)
 	{
 		str[byte++] = 0;
+		n--;
 	}
 }
 
@@ -36,8 +37,10 @@ void	*ft_calloc(size_t count, size_t size)
 		return (NULL);
 	}
 	buff = malloc(space);
-	if (buff == NULL)
+	if (!buff)
+	{
 		return (NULL);
+	}
 	ft_bzero(buff, space);
 	return (buff);
 }

@@ -6,7 +6,7 @@
 /*   By: hoel-mos <hoel-mos@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/13 13:58:27 by hoel-mos          #+#    #+#             */
-/*   Updated: 2025/02/13 13:59:55 by hoel-mos         ###   ########.fr       */
+/*   Updated: 2025/02/28 23:12:22 by hoel-mos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ int	ft_syntax(char *str)
 		if (!(str[i] >= '0' && str[i] <= '9'))
 			return (1);
 	}
+	printf("---> 3 <---\n");
 	return (0);
 }
 
@@ -61,8 +62,17 @@ void	ft_stackclear(t_stack **stack)
 	*stack = NULL;
 }
 
-void	ft_free(t_stack **a)
+void	ft_free(t_stack **a, char **av)
 {
+	int	i;
+
+	i = 0;
+	while(av[i])
+	{
+		free(av[i]);
+		i++;
+	}
+	free(av);
 	ft_stackclear(a);
 	write(1, "Error\n", 6);
 	exit(0);

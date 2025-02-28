@@ -6,7 +6,7 @@
 /*   By: hoel-mos <hoel-mos@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/13 13:59:04 by hoel-mos          #+#    #+#             */
-/*   Updated: 2025/02/13 13:59:55 by hoel-mos         ###   ########.fr       */
+/*   Updated: 2025/02/28 23:11:08 by hoel-mos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,19 +61,13 @@ void	sort(t_stack **stacka)
 
 void	ft_f(char **tab)
 {
-	int	i;
-	int	u;
+	unsigned int	i;
 
 	i = 0;
-	u = 0;
 	while (tab[i])
 	{
+		free(tab[i]);
 		i++;
-		u++;
 	}
-	while (u--)
-	{
-		free(tab[u]);
-	}
-	free(tab);
+	free(tab);	
 }

@@ -6,97 +6,105 @@
 /*   By: hoel-mos <hoel-mos@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/13 13:59:33 by hoel-mos          #+#    #+#             */
-/*   Updated: 2025/02/13 13:59:55 by hoel-mos         ###   ########.fr       */
+/*   Updated: 2025/02/28 22:23:26 by hoel-mos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-static char	*ft_fill(const char *s, int *i)
+static char	**malloc_error(char **tab)
 {
-	char	*buff;
-	int		o;
-	int		count;
-	int		y;
+	unsigned int	i;
 
-	while ((s[*i] == ' ') && s[*i])
-		(*i)++;
-	count = 0;
-	y = *i;
-	while ((s[*i] != ' ') && s[*i])
+	i = 0;
+	while (tab[i])
 	{
-		(*i)++;
-		count++;
+		free(tab[i]);
+		i++;
 	}
-	buff = ft_calloc(sizeof(char), count + 1);
-	if (!buff)
-		return (NULL);
-	o = 0;
-	while (s[y + o] && s[y + o] != ' ')
-	{
-		buff[o] = s[y + o];
-		o++;
-	}
-	buff[o] = '\0';
-	return (buff);
-}
-
-static int	ft_count(const char *s)
-{
-	int	index;
-	int	count;
-
-	count = 0;
-	index = 0;
-	while (s[index])
-	{
-		while (s[index] == ' ')
-			index++;
-		if (s[index] != ' ' && s[index])
-		{
-			count++;
-			while (s[index] != ' ' && s[index])
-			{
-				index++;
-			}
-		}
-	}
-	return (count);
-}
-
-static void	*ft_fre(char **buff, int d)
-{
-	while (--d >= 0)
-		free(buff[d]);
-	free(buff);
+	free(tab);
 	return (NULL);
 }
 
-char	**ft_split(char *s)
+static size_t	ft_strlenv2(const char *s, char c)
 {
-	int		d;
-	int		index;
-	char	**buffer;
+	int	i;
 
-	if (!s || !*s)
+	i = 0;
+	while (s[i] != c && s[i])
+		i++;
+	return (i);
+}
+
+static char	*ft_strdupv2(const char *s1, char c)
+{
+	char	*scpy;
+	int		slen;
+	int		i;
+
+	slen = ft_strlenv2(s1, c);
+	scpy = (char *) malloc ((slen + 1) * sizeof(char));
+	if (!scpy)
 		return (NULL);
-	d = ft_count(s);
-	buffer = ft_calloc(sizeof(char *), (d + 1));
-	if (buffer == NULL)
-		return (NULL);
-	index = 0;
-	d = 0;
-	while (s[index])
+	i = 0;
+	while (s1[i] && s1[i] != c)
 	{
-		while (s[index] == ' ')
-			index++;
-		if (s[index] && s[index] != ' ')
+		scpy[i] = s1[i];
+		i++;
+	}
+	scpy[i] = 0;
+	return (scpy);
+}
+
+static int	done(char **str, const char *s, char c)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	j = 0;
+	while (s[i] == c && c)
+		i++;
+	while (s[i])
+	{
+		str[j] = ft_strdupv2(&s[i], c);
+		if (!str[j])
+			return (1);
+		while (s[i] != c && s[i])
+			i++;
+		while (s[i] == c && c)
+			i++;
+		j++;
+	}
+	str[j] = 0;
+	return (0);
+}
+
+char	**ft_split(char const *s, char c)
+{
+	char	**str;
+	int		i;
+	int		count;
+
+	i = 0;
+	count = 0;
+	if (s == NULL)
+		return (NULL);
+	while (s[i])
+	{
+		if (s[i] == c)
+			i++;
+		else
 		{
-			buffer[d] = ft_fill(s, &index);
-			if (!buffer[d++])
-				return (ft_fre(buffer, d));
+			count++;
+			while (s[i] != c && s[i])
+				i++;
 		}
 	}
-	buffer[d] = 0;
-	return (buffer);
+	str = (char **) malloc ((count + 1) * sizeof(char *));
+	if (!str)
+		return (NULL);
+	if (done(str, s, c) == 1)
+		return (malloc_error(str));
+	return (str);
 }
