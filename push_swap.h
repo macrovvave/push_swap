@@ -6,7 +6,7 @@
 /*   By: hoel-mos <hoel-mos@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/13 13:58:51 by hoel-mos          #+#    #+#             */
-/*   Updated: 2025/02/28 22:20:42 by hoel-mos         ###   ########.fr       */
+/*   Updated: 2025/03/01 15:15:50 by hoel-mos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,21 +44,21 @@ void	get_cost(t_stack *a, t_stack *b);
 void	nodes_data(t_stack *a, t_stack *b);
 void	rotation(t_stack **stack, t_stack *top_node, char stack_name);
 void	ft_append(t_stack **a, int num);
-void	ft_prepare(t_stack **a, char **av);
+void	ft_prepare1(t_stack **a, char **av);
+void	ft_prepare2(t_stack **a, char **av);
 void	ft_stackclear(t_stack **stack);
-void	ft_free(t_stack **a, char **av);
+void	ft_free(t_stack **a, char **av, int check );
 void	get_theone(t_stack *b);
 void	swap(t_stack **head);
 void	ft_f(char **tab);
 void	ft_bzero(void *s, size_t n);
-void	*ft_calloc(size_t count, size_t size);
 // void	*ft_ff(char	*buf);
 
 int		ft_syntax(char *str);
 int		ft_repetition(t_stack *a, int num);
 int		stack_len(t_stack *satck);
 
-size_t		ft_atoi(char *str);
+size_t	ft_atoi(char *str);
 
 char	**ft_split(char const *s, char c);
 

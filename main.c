@@ -6,7 +6,7 @@
 /*   By: hoel-mos <hoel-mos@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/13 13:58:37 by hoel-mos          #+#    #+#             */
-/*   Updated: 2025/02/28 23:02:15 by hoel-mos         ###   ########.fr       */
+/*   Updated: 2025/03/01 14:52:07 by hoel-mos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,12 +24,11 @@ int	main(int ac, char **av)
 		return (1);
 	else if (ac == 2)
 	{
-		ft_prepare(&a, (tab = ft_split(av[1], ' ')));
+		ft_prepare1(&a, (tab = ft_split(av[1], ' ')));
 		ft_f(tab);
 	}
 	else
-		ft_prepare(&a, av + 1);
-	printf("---> 1 <---\n");
+		ft_prepare2(&a, av + 1);
 	if (!stack_sorting(a))
 	{
 		if (stack_len(a) == 2)

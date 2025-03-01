@@ -6,10 +6,10 @@
 /*   By: hoel-mos <hoel-mos@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/13 13:59:41 by hoel-mos          #+#    #+#             */
-/*   Updated: 2025/02/13 13:59:55 by hoel-mos         ###   ########.fr       */
+/*   Updated: 2025/03/01 14:34:41 by hoel-mos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include <stdio.h>
+
 #include "push_swap.h"
 
 t_stack	*get_smallest(t_stack *stack)
@@ -52,7 +52,7 @@ void	ft_append(t_stack **a, int num)
 
 	if (a == NULL)
 		return ;
-	node = ft_calloc(sizeof(t_stack), 1);
+	node = malloc(sizeof(t_stack));
 	if (!node)
 		return ;
 	node->next = NULL;
