@@ -2,7 +2,7 @@ CC = cc
 CFLAGS = #-Wall -Wextra -Werror -ggdb
 NAME = push_swap
 SRC = main.c ft_prepare.c push_swap.c reverse_rotate.c sorting.c swap.c \
-      errors.c node_data.c push.c rotate.c split.c utils.c calloc.c
+      errors.c node_data.c push.c rotate.c split.c utils.c
 
 OBJ = $(SRC:.c=.o)
 
