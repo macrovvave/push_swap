@@ -36,6 +36,8 @@ typedef struct s_stack
 bool	stack_sorting(t_stack *stack);
 void	get_wanted_node(t_stack *a, t_stack *b);
 
+void	*ft_calloc(size_t count, size_t size);
+
 void	nodes_data(t_stack *a, t_stack *b);
 void	push_swap(t_stack **a, t_stack **b);
 void	get_current_position(t_stack *stack);
@@ -43,7 +45,7 @@ void	sort(t_stack **stack);
 void	get_cost(t_stack *a, t_stack *b);
 void	nodes_data(t_stack *a, t_stack *b);
 void	rotation(t_stack **stack, t_stack *top_node, char stack_name);
-void	ft_append(t_stack **a, int num);
+void	ft_append(t_stack **a, int num, size_t sign);
 void	ft_prepare1(t_stack **a, char **av);
 void	ft_prepare2(t_stack **a, char **av);
 void	ft_stackclear(t_stack **stack);
@@ -55,7 +57,7 @@ void	ft_bzero(void *s, size_t n);
 // void	*ft_ff(char	*buf);
 
 int		ft_syntax(char *str);
-int		ft_repetition(t_stack *a, int num);
+int		ft_repetition(t_stack *a, int num, size_t sign);
 int		stack_len(t_stack *satck);
 
 size_t	ft_atoi(char *str);

@@ -31,10 +31,12 @@ int	ft_syntax(char *str)
 	return (0);
 }
 
-int	ft_repetition(t_stack *a, int num)
+int	ft_repetition(t_stack *a, int num, size_t sign)
 {
 	if (NULL == a)
 		return (0);
+	if (sign == 0)
+		num *= -1;
 	while (a)
 	{
 		if (a->value == num)

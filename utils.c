@@ -45,11 +45,42 @@ t_stack	*return_theone(t_stack *stack)
 	return (NULL);
 }
 
-void	ft_append(t_stack **a, int num)
+void	ft_append(t_stack **a, int num, size_t sign)
 {
 	t_stack	*last_node;
 	t_stack	*node;
 
+	if (sign == 0)
+		num = -num;
+	if (a == NULL)
+		return ;
+	node = ft_calloc(1, sizeof(t_stack));
+	if (!node)
+		return ;
+	node->next = NULL;
+	node->value = num;
+	if (*a == NULL)
+	{
+		*a = node;
+		node->previous = NULL;
+	}
+	else
+	{
+		last_node = getlast(*a);
+		last_node->next = node;
+		last_node->next->previous = last_node;
+	}
+}
+
+
+/*
+void	ft_append(t_stack **a, int num, size_t sign)
+{
+	t_stack	*last_node;
+	t_stack	*node;
+
+	if (sign == 0)
+		num = -num;
 	if (a == NULL)
 		return ;
 	node = malloc(sizeof(t_stack));
@@ -69,7 +100,7 @@ void	ft_append(t_stack **a, int num)
 		last_node->next->previous = last_node;
 	}
 }
-
+*/
 t_stack	*getlast(t_stack *head)
 {
 	if (head == NULL)

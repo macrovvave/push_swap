@@ -11,11 +11,12 @@
 /* ************************************************************************** */
 
 #include "push_swap.h"
+#include <stddef.h>
 
 size_t	ft_atoi(char *str)
 {
-	int		i;
 	size_t	result;
+	int		i;
 
 	i = 0;
 	result = 0;
@@ -52,37 +53,80 @@ void	ft_prepare1(t_stack **a, char **av)
 			ft_free(a, av, 1);
 		if (sign == 1 && num > 2147483647)
 			ft_free(a, av, 1);
-		if (ft_repetition(*a, (int)num))
+		if (ft_repetition(*a, (int)num, sign))
 			ft_free(a, av, 1);
-		ft_append(a, (int)num);
+		ft_append(a, (int)num, sign);
 		index++;
 	}
+}
+
+int	free_tab(char **tab, size_t i, int c)
+{
+	size_t	u;
+
+	if (c == 1)
+	{
+		u = 0;
+		while (u <= i)
+		{
+			free(tab[u]);
+			u++;
+		}
+		free(tab);
+		return (1);
+	}
+	else
+	{
+		u = 0;
+		while (u <= i)
+		{
+			free(tab[u]);
+			u++;
+		}
+		free(tab);
+	}
+	return (0);
+}
+
+
+int	ft_prep(t_stack **a, char *pum)
+{
+	char	**tab;
+
+	size_t (i), (num), (sign);
+	tab = ft_split(pum, ' ');
+	num = 0;
+	sign = 1;
+	i = 0;
+	while (tab[i])
+	{
+		if (tab[i][0] == '-')
+			sign = 0;
+		if (ft_syntax(tab[i]) == 1)
+			return (free_tab(tab, i, 1));
+		num = ft_atoi(tab[i]);
+		if (sign == 0 && num > 2147483648)
+			return (free_tab(tab, i, 1));
+		if (sign == 1 && num > 2147483647)
+			return (free_tab(tab, i, 1));
+		if (ft_repetition(*a, (int)num, sign))
+			return (free_tab(tab, i, 1));
+		ft_append(a, (int)num, sign);
+		i++;
+	}
+	return (free_tab(tab, i, 0));
 }
 
 void	ft_prepare2(t_stack **a, char **av)
 {
-	size_t		num;
-	size_t		index;
-	int			sign;
+	size_t	index;
 
 	index = 0;
-	sign = 1;
 	while (av[index])
 	{
-		if (av[index][0] == '-')
-			sign = 0;
-		if (ft_syntax(av[index]) == 1)
-		{
+		if (ft_prep(a, av[index]))
 			ft_free(a, av, 2);
-		}
-		num = ft_atoi(av[index]);
-		if (sign == 0 && num > 2147483648)
-			ft_free(a, av, 2);
-		if (sign == 1 && num > 2147483647)
-			ft_free(a, av, 2);
-		if (ft_repetition(*a, (int)num))
-			ft_free(a, av, 2);
-		ft_append(a, (int)num);
 		index++;
 	}
 }
+
