@@ -6,7 +6,7 @@
 /*   By: hoel-mos <hoel-mos@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/13 13:59:33 by hoel-mos          #+#    #+#             */
-/*   Updated: 2025/03/01 15:16:17 by hoel-mos         ###   ########.fr       */
+/*   Updated: 2025/03/13 02:07:08 by hoel-mos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ static char	*ft_strdupv2(const char *s1, char c)
 	int		i;
 
 	slen = ft_strlenv2(s1, c);
-	scpy = (char *) malloc ((slen + 1) * sizeof(char));
+	scpy = (char *) ft_calloc(slen + 1, sizeof(char));
 	if (!scpy)
 		return (NULL);
 	i = 0;
@@ -88,7 +88,7 @@ char	**ft_split(char const *s, char c)
 
 	i = 0;
 	count = 0;
-	if (s == NULL)
+	if (!s)
 		return (NULL);
 	while (s[i])
 	{
@@ -101,7 +101,7 @@ char	**ft_split(char const *s, char c)
 				i++;
 		}
 	}
-	str = (char **) malloc ((count + 1) * sizeof(char *));
+	str = (char **) ft_calloc(count + 1, sizeof(char *));
 	if (!str)
 		return (NULL);
 	if (done(str, s, c) == 1)

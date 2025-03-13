@@ -6,16 +6,16 @@
 /*   By: hoel-mos <hoel-mos@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/13 13:58:44 by hoel-mos          #+#    #+#             */
-/*   Updated: 2025/03/01 15:07:36 by hoel-mos         ###   ########.fr       */
+/*   Updated: 2025/03/13 02:06:54 by hoel-mos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 #include <stddef.h>
 
-size_t	ft_atoi(char *str)
+long	ft_atoi(char *str)
 {
-	size_t	result;
+	long	result;
 	int		i;
 
 	i = 0;
@@ -32,42 +32,14 @@ size_t	ft_atoi(char *str)
 	return (result);
 }
 
-void	ft_prepare1(t_stack **a, char **av)
-{
-	size_t		num;
-	size_t		index;
-	int			sign;
-
-	index = 0;
-	sign = 1;
-	while (av[index])
-	{
-		if (av[index][0] == '-')
-			sign = 0;
-		if (ft_syntax(av[index]) == 1)
-		{
-			ft_free(a, av, 1);
-		}
-		num = ft_atoi(av[index]);
-		if (sign == 0 && num > 2147483648)
-			ft_free(a, av, 1);
-		if (sign == 1 && num > 2147483647)
-			ft_free(a, av, 1);
-		if (ft_repetition(*a, (int)num, sign))
-			ft_free(a, av, 1);
-		ft_append(a, (int)num, sign);
-		index++;
-	}
-}
-
-int	free_tab(char **tab, size_t i, int c)
+int	free_tab(char **tab, int c)
 {
 	size_t	u;
 
 	if (c == 1)
 	{
 		u = 0;
-		while (u <= i)
+		while (tab[u])
 		{
 			free(tab[u]);
 			u++;
@@ -78,7 +50,7 @@ int	free_tab(char **tab, size_t i, int c)
 	else
 	{
 		u = 0;
-		while (u <= i)
+		while (tab[u])
 		{
 			free(tab[u]);
 			u++;
@@ -88,33 +60,33 @@ int	free_tab(char **tab, size_t i, int c)
 	return (0);
 }
 
-
 int	ft_prep(t_stack **a, char *pum)
 {
-	char	**tab;
+	char		**tab;
 
-	size_t (i), (num), (sign);
-	tab = ft_split(pum, ' ');
+	long (i), (num), (sign);
 	num = 0;
 	sign = 1;
 	i = 0;
+	tab = ft_split(pum, ' ');
 	while (tab[i])
 	{
 		if (tab[i][0] == '-')
 			sign = 0;
 		if (ft_syntax(tab[i]) == 1)
-			return (free_tab(tab, i, 1));
+			return (free_tab(tab, 1));
 		num = ft_atoi(tab[i]);
 		if (sign == 0 && num > 2147483648)
-			return (free_tab(tab, i, 1));
+			return (free_tab(tab, 1));
 		if (sign == 1 && num > 2147483647)
-			return (free_tab(tab, i, 1));
+			return (free_tab(tab, 1));
 		if (ft_repetition(*a, (int)num, sign))
-			return (free_tab(tab, i, 1));
+			return (free_tab(tab, 1));
 		ft_append(a, (int)num, sign);
+		sign = 1;
 		i++;
 	}
-	return (free_tab(tab, i, 0));
+	return (free_tab(tab, 0));
 }
 
 void	ft_prepare2(t_stack **a, char **av)
@@ -124,9 +96,10 @@ void	ft_prepare2(t_stack **a, char **av)
 	index = 0;
 	while (av[index])
 	{
+		if (av[index][0] == '\0')
+			ft_free(a, av, 2);
 		if (ft_prep(a, av[index]))
 			ft_free(a, av, 2);
 		index++;
 	}
 }
-

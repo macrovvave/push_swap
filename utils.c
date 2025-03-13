@@ -6,7 +6,7 @@
 /*   By: hoel-mos <hoel-mos@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/13 13:59:41 by hoel-mos          #+#    #+#             */
-/*   Updated: 2025/03/01 14:34:41 by hoel-mos         ###   ########.fr       */
+/*   Updated: 2025/03/11 21:22:38 by hoel-mos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,35 +72,6 @@ void	ft_append(t_stack **a, int num, size_t sign)
 	}
 }
 
-
-/*
-void	ft_append(t_stack **a, int num, size_t sign)
-{
-	t_stack	*last_node;
-	t_stack	*node;
-
-	if (sign == 0)
-		num = -num;
-	if (a == NULL)
-		return ;
-	node = malloc(sizeof(t_stack));
-	if (!node)
-		return ;
-	node->next = NULL;
-	node->value = num;
-	if (*a == NULL)
-	{
-		*a = node;
-		node->previous = NULL;
-	}
-	else
-	{
-		last_node = getlast(*a);
-		last_node->next = node;
-		last_node->next->previous = last_node;
-	}
-}
-*/
 t_stack	*getlast(t_stack *head)
 {
 	if (head == NULL)

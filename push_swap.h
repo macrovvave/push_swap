@@ -6,7 +6,7 @@
 /*   By: hoel-mos <hoel-mos@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/13 13:58:51 by hoel-mos          #+#    #+#             */
-/*   Updated: 2025/03/01 15:15:50 by hoel-mos         ###   ########.fr       */
+/*   Updated: 2025/03/11 22:16:13 by hoel-mos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ typedef struct s_stack
 bool	stack_sorting(t_stack *stack);
 void	get_wanted_node(t_stack *a, t_stack *b);
 
+void	ft_exit(void);
 void	*ft_calloc(size_t count, size_t size);
 
 void	nodes_data(t_stack *a, t_stack *b);
@@ -60,7 +61,7 @@ int		ft_syntax(char *str);
 int		ft_repetition(t_stack *a, int num, size_t sign);
 int		stack_len(t_stack *satck);
 
-size_t	ft_atoi(char *str);
+long	ft_atoi(char *str);
 
 char	**ft_split(char const *s, char c);
 

@@ -6,7 +6,7 @@
 /*   By: hoel-mos <hoel-mos@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/13 13:58:27 by hoel-mos          #+#    #+#             */
-/*   Updated: 2025/03/01 15:06:20 by hoel-mos         ###   ########.fr       */
+/*   Updated: 2025/03/12 00:17:37 by hoel-mos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@ int	ft_syntax(char *str)
 	int	i;
 
 	i = 0;
-	if (!((str[i] == '+' || str[i] == '-')
-			|| (str[i] >= '0' && str[i] <= '9')))
+	if (str[i] != '+' && str[i] != '-'
+		&& !(str[i] >= '0' && str[i] <= '9'))
 		return (1);
 	if ((str[i] == '+' || str[i] == '-')
 		&& !(str[i + 1] >= '0' && str[i + 1] <= '9'))
@@ -77,13 +77,11 @@ void	ft_free(t_stack **a, char **av, int check)
 		}
 		free(av);
 		ft_stackclear(a);
-		write(1, "Error\n", 6);
-		exit(0);
+		ft_exit();
 	}
 	else if (check == 2)
 	{
 		ft_stackclear(a);
-		write(1, "Error\n", 6);
-		exit(0);
+		ft_exit();
 	}
 }
